@@ -1,0 +1,125 @@
+/* ------------------------------
+   GLOBAL
+--------------------------------*/
+.body {
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ------------------------------
+   BACKGROUND ANIMATION
+--------------------------------*/
+.background-animation {
+    background: #fee440;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+    filter: blur(1px) brightness(0.95);
+    /* soft glowing blobs */
+}
+
+.background-animation svg {
+    width: 140%;
+    height: 140%;
+
+    /* show yellow through */
+}
+
+/* ------------------------------
+   FORM CONTAINER
+--------------------------------*/
+.form-container {
+    background: rgba(255, 255, 255, 0.274);
+    position: fixed;
+    top: 20px;
+    right: 10px;
+    backdrop-filter: blur(12px);
+    padding: 40px;
+    margin: 40px;
+    border-radius: 20px;
+    max-width: 450px;
+    width: 100%;
+
+    box-shadow:
+        0 10px 20px rgba(0, 0, 0, 0.15),
+        0 6px 6px rgba(0, 0, 0, 0.1);
+
+    animation: fadein 1.2s ease;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Improve form elements */
+.form-container .form-label {
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.form-container input {
+    border-radius: 10px !important;
+    padding: 12px !important;
+    border: 1px solid #ccc;
+}
+
+.form-container button {
+    width: 100%;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* Links icon */
+.links {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    opacity: 0.6;
+}
+
+.links:hover {
+    opacity: 1;
+}
+
+.page-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.left-panel {
+   
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+
+.right-panel {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    left: 80px;
+}
+img {
+    width:80px;
+    object-fit: cover;
+    border-radius: 5%;
+}

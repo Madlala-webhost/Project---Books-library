@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Library</title>
+    <link rel="stylesheet" href="main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <div class="background-animation">
+        <svg preserveAspectRatio="xMidYMid slice" viewBox="10 10 80 80">
+            <defs>
+                <style>
+                    @keyframes rotate {
+                        0% {
+                            transform: rotate(0deg);
+                        }
+        
+                        100% {
+                            transform: rotate(360deg);
+                        }
+                    }
+        
+                    .out-top {
+                        animation: rotate 20s linear infinite;
+                        transform-origin: 13px 25px;
+                    }
+        
+                    .in-top {
+                        animation: rotate 10s linear infinite;
+                        transform-origin: 13px 25px;
+                    }
+        
+                    .out-bottom {
+                        animation: rotate 25s linear infinite;
+                        transform-origin: 84px 93px;
+                    }
+        
+                    .in-bottom {
+                        animation: rotate 15s linear infinite;
+                        transform-origin: 84px 93px;
+                    }
+                </style>
+            </defs>
+            <path fill="#9b5de5" class="out-top"
+                d="M37-5C25.1-14.7,5.7-19.1-9.2-10-28.5,1.8-32.7,31.1-19.8,49c15.5,21.5,52.6,22,67.2,2.3C59.4,35,53.7,8.5,37-5Z" />
+            <path fill="#f15bb5" class="in-top"
+                d="M20.6,4.1C11.6,1.5-1.9,2.5-8,11.2-16.3,23.1-8.2,45.6,7.4,50S42.1,38.9,41,24.5C40.2,14.1,29.4,6.6,20.6,4.1Z" />
+            <path fill="#00bbf9" class="out-bottom"
+                d="M105.9,48.6c-12.4-8.2-29.3-4.8-39.4.8-23.4,12.8-37.7,51.9-19.1,74.1s63.9,15.3,76-5.6c7.6-13.3,1.8-31.1-2.3-43.8C117.6,63.3,114.7,54.3,105.9,48.6Z" />
+            <path fill="#00f5d4" class="in-bottom"
+                d="M102,67.1c-9.6-6.1-22-3.1-29.5,2-15.4,10.7-19.6,37.5-7.6,47.8s35.9,3.9,44.5-12.5C115.5,92.6,113.9,74.6,102,67.1Z" />
+        </svg>
+        
+        <div class="links">
+            <a href="https://dev.to/uuuuuulala/making-background-blob-animation-in-just-15kb-step-by-step-guide-2482"
+                target="_blank">tutorial<img class="icon" src="https://ksenia-k.com/img/icons/link.svg"></a>
+        </div>
+    </div>
+<!--display data-->
+<div class="container py-4">
+    <div class="row">
+
+        <!-- Book List -->
+        <div class="col-lg-8">
+            <h1 class="mb-3">📚 Books Library</h1>
+            <hr>
+
+            <% if (locals.books && books.length > 0) { %>
+
+                <h5 class="text-muted mb-4">
+                    You have read <strong><%= books.length %></strong> books so far!
+                </h5>
+
+                <div class="row g-4">
+
+                    <% books.forEach(function(book){ %>
+
+                    <div class="col-md-6 col-xl-4">
+
+                        <div class="card border-0 shadow rounded-4 overflow-hidden h-100">
+
+                            <!-- Image -->
+                            <div class="position-relative" style="height:240px; background:#e9ecef;">
+
+                                <% if(book.cover_id){ %>
+
+                                    <img
+                                        src="https://covers.openlibrary.org/b/id/<%= book.cover_id %>-L.jpg"
+                                        class="w-100 h-100 object-fit-cover"
+                                        alt="<%= book.title %>">
+
+                                <% } else { %>
+
+                                    <div class="d-flex flex-column justify-content-center align-items-center h-100 text-muted">
+                                        <i class="bi bi-book fs-1 opacity-25"></i>
+                                        <span class="small">No Cover</span>
+                                    </div>
+
+                                <% } %>
+
+                                <!-- Ranking Badge -->
+                                <span class="position-absolute top-0 start-0 m-3 badge rounded-pill bg-primary shadow px-3 py-2">
+                                    ⭐ <%= book.rank %>/10
+                                </span>
+
+                            </div>
+
+                            <!-- Card Body -->
+                            <div class="card-body">
+
+                                <h5 class="card-title mb-1">
+                                    <%= book.title %>
+                                </h5>
+
+                                <p class="text-muted mb-3">
+                                    <i class="bi bi-person-fill"></i>
+                                    <%= book.author %>
+                                </p>
+
+                                <p class="mb-2">
+                                    <strong>Genre:</strong>
+                                    <%= book.genre %>
+                                </p>
+
+                                <p class="mb-3">
+                                    <strong>Read:</strong>
+                                    <%= book.recency %>
+                                </p>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <% }) %>
+
+                </div>
+
+            <% } else { %>
+
+                <div class="text-center py-5 text-muted">
+                    <i class="bi bi-book fs-1 opacity-25"></i>
+                    <h5 class="mt-3">No books added yet</h5>
+                </div>
+
+            <% } %>
+
+        </div>
+
+        <!-- Add Book Form -->
+        <div class="col-lg-4">
+
+            <div class="card border-0 shadow rounded-4">
+
+                <div class="card-body">
+
+                    <h3 class="mb-4">➕ Add a New Book</h3>
+
+                    <form action="/add" method="POST">
+
+                        <div class="mb-3">
+                            <label class="form-label">Title</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="newBook"
+                                placeholder="Book title"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Author</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="bookAuthor"
+                                placeholder="Book author"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Genre</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="bookGenre"
+                                placeholder="Genre">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Ranking</label>
+                            <input
+                                type="number"
+                                min="1"
+                                max="10"
+                                class="form-control"
+                                name="bookRanking"
+                                placeholder="1-10">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Date Read</label>
+                            <input
+                                type="date"
+                                class="form-control"
+                                name="bookRecency">
+                        </div>
+
+                        <button class="btn btn-primary w-100">
+                            Add Book
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+</body>
+</html>
